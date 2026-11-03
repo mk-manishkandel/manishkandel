@@ -424,10 +424,10 @@ html:not(.js) .curtain { display: none; }
 .topo__node--vlan rect { fill: rgba(212, 175, 106, .08); stroke: rgba(212, 175, 106, .4); }
 .topo text { fill: var(--frost); font-family: var(--sans); font-size: 13px; font-weight: 600; text-anchor: middle; letter-spacing: .02em; }
 .topo text.sub { fill: var(--steel); font-size: 10.5px; font-weight: 400; }
-.topo__node--vlan text { fill: var(--gold-soft); font-size: 11px; letter-spacing: .18em; }
+.topo__node--vlan text { fill: var(--gold-soft); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
 .topo__end path, .topo__end rect { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; }
 .topo__end circle { fill: var(--gold); }
-.topo__end text { fill: var(--steel); font-size: 11.5px; font-weight: 600; }
+.topo__end text { fill: var(--steel); font-size: 10.5px; font-weight: 600; }
 .topo__flow path { stroke-dasharray: 6 94; animation: packet 2.6s linear infinite; }
 @keyframes packet { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
 @media (max-width: 900px) { .net__grid { grid-template-columns: minmax(0, 1fr); } }

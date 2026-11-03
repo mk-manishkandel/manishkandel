@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found · Manish Kandel</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B1426">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300..800;1,6..12,300..800&family=Prata&display=swap">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    .nf { min-height: 100svh; display: grid; place-items: center; padding: 2rem 1rem; position: relative; overflow: hidden; isolation: isolate;
+      background: radial-gradient(60% 60% at 80% 10%, rgba(54, 84, 150, .35), transparent 65%), radial-gradient(50% 50% at 0% 100%, rgba(212, 175, 106, .1), transparent 60%), var(--midnight); }
+    .nf__ring { position: absolute; z-index: -1; width: min(90vw, 640px); aspect-ratio: 1; border: 1px solid rgba(212, 175, 106, .14); border-radius: 50%; }
+    .nf__ring--2 { width: min(64vw, 440px); border-color: rgba(212, 175, 106, .1); }
+    .nf__box { text-align: center; display: grid; justify-items: center; gap: 1.25rem; max-width: 34rem; }
+    .nf__logo { width: 48px; height: 48px; fill: var(--gold); }
+    .nf__code { font-family: var(--display); font-size: clamp(6rem, 22vw, 11rem); line-height: .9; color: var(--gold); letter-spacing: -.03em; margin: .5rem 0 0; }
+    .nf__title { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0; line-height: 1.2; }
+    .nf__text { margin: 0; color: rgba(238, 240, 245, .7); text-wrap: balance; }
+    .nf__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: .75rem; }
+  </style>
+</head>
+<body>
+  <main class="nf">
+    <div class="nf__ring" aria-hidden="true"></div>
+    <div class="nf__ring nf__ring--2" aria-hidden="true"></div>
+    <div class="nf__box">
+      <a href="/" aria-label="Manish Kandel, home">
+        <svg class="nf__logo" viewBox="0 0 512 512" aria-hidden="true"><polygon points="368.9 109.37 261.37 109.37 188.73 182.01 296.26 182.01 368.9 109.37"/><polygon points="482.71 109.37 379.99 109.37 233.36 256 379.99 402.63 482.71 402.63 336.08 256 482.71 109.37"/><polygon points="29.29 401.95 368.9 401.95 296.26 329.31 101.92 329.31 29.29 401.95"/></svg>
+      </a>
+      <p class="nf__code">404</p>
+      <h1 class="nf__title">This page took a wrong turn.</h1>
+      <p class="nf__text">The link may be old or mistyped. Everything else is still where you left it.</p>
+      <div class="nf__actions">
+        <a class="btn btn--gold" href="/">Back to home <span class="btn__arr" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="/#contact">Get in touch</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
