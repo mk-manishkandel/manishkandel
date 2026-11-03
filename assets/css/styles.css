@@ -461,13 +461,12 @@ html:not(.js) .curtain { display: none; }
 .case:hover .case__float { transform: translateY(-8px); }
 .case__media--term img { border-radius: 14px; }
 .case__media--app { display: grid; place-items: center; }
-.phones { position: relative; width: min(100%, 440px); aspect-ratio: 1; }
-.case__media .phones img { position: absolute; width: 42%; border-radius: clamp(16px, 2.4vw, 26px); border: 5px solid #05090f; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
-.case__media .phones img:first-child { left: 12%; top: 0; z-index: 1; }
-.case__media .phones img + img { right: 12%; top: 8%; transition: transform 1s var(--ease); }
+.phones { position: relative; width: min(100%, 520px); aspect-ratio: 520 / 380; }
+.case__media .phones img { position: absolute; top: 0; width: 46%; border-radius: clamp(16px, 2.4vw, 26px) clamp(16px, 2.4vw, 26px) 0 0; border: 5px solid #05090f; border-bottom: 0;
+  box-shadow: none; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+.case__media .phones img:first-child { left: 2%; }
+.case__media .phones img + img { right: 2%; top: 6%; transition: transform 1s var(--ease); }
 .case:hover .phones img + img { transform: translateY(-8px); }
-.case__title--icon { display: flex; align-items: center; gap: .9rem; }
-.case__title--icon img { width: 56px; height: 56px; border-radius: 14px; flex: none; }
 .case__body { display: grid; gap: 1rem; align-content: start; min-width: 0; }
 .case__body p { margin: 0; color: rgba(238, 240, 245, .72); font-size: .975rem; }
 .case__body strong { color: var(--frost); font-weight: 700; }
