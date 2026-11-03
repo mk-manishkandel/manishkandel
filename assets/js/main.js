@@ -175,8 +175,8 @@
   fetch("https://api.github.com/users/mk-manishkandel/repos?sort=updated&per_page=12")
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(repos => {
-      const HIDE = ["mk-manishkandel", "manishkandel", "hack-your-tv"];   // never shown
-      const FEATURE = ["pos-for-restaurant"];                              // always shown
+      const HIDE = ["mk-manishkandel", "manishkandel", "hack-your-tv", "pos-for-restaurant", "minisync", "trackyourmoney"]; // never shown (featured above)
+      const FEATURE = [];                            // always shown
       const pool = repos.filter(r => !r.fork && !HIDE.includes(r.name.toLowerCase()));
       const featured = pool.filter(r => FEATURE.includes(r.name.toLowerCase()));
       const rest = pool.filter(r => !FEATURE.includes(r.name.toLowerCase()));
@@ -204,4 +204,53 @@
   /* ---------- Year ---------- */
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
+})();
+
+/* ---------- Contact form (FormSubmit) ---------- */
+(() => {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+  const status = document.getElementById("cf-status");
+  const btn = form.querySelector("button[type=submit]");
+  const label = form.querySelector(".form__btn-label");
+  const setStatus = (msg, kind) => { status.textContent = msg; status.className = "form__status" + (kind ? " is-" + kind : ""); };
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (form._honey.value) return; // bot
+    let ok = true;
+    ["name", "email", "message"].forEach(n => {
+      const el = form.elements[n];
+      const valid = el.value.trim() !== "" && (n !== "email" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+      el.closest(".field").classList.toggle("is-invalid", !valid);
+      if (!valid) ok = false;
+    });
+    if (!ok) { setStatus("Please fill in your name, a valid email and a message.", "err"); return; }
+
+    btn.disabled = true; label.textContent = "Sending…"; setStatus("");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/hello@manishkandel.com.np", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          topic: form.topic.value,
+          message: form.message.value.trim(),
+          _subject: "New message from manishkandel.com.np: " + form.topic.value,
+          _replyto: form.email.value.trim(),
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === false || data.success === "false") throw new Error(data.message || res.status);
+      form.reset();
+      setStatus("Thanks, your message was sent. I'll reply soon.", "ok");
+    } catch (err) {
+      setStatus("Your message couldn't be sent. Please email hello@manishkandel.com.np directly.", "err");
+    } finally {
+      btn.disabled = false; label.textContent = "Send message";
+    }
+  });
 })();

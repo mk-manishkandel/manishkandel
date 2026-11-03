@@ -36,6 +36,7 @@
         <ul class="nav__links">
           <li><a href="#about">About</a></li>
           <li><a href="#build">What I do</a></li>
+          <li><a href="#network">Network</a></li>
           <li><a href="#journey">Journey</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -50,6 +51,7 @@
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#build">What I do</a></li>
+        <li><a href="#network">Network</a></li>
         <li><a href="#journey">Journey</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -176,6 +178,82 @@
       </div>
     </section>
 
+    <!-- ============ NETWORK ============ -->
+    <section class="section net" id="network">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="eyebrow">Network infrastructure</span>
+          <span class="sec-head__idx">From 100 to 1,000+ users</span>
+        </header>
+        <div class="net__grid">
+          <div class="net__copy">
+            <h2 class="net__lead reveal">I took a network built for <span class="gold">100 people</span> and rebuilt it to serve more than <span class="gold">1,000</span>.</h2>
+            <p class="reveal">When I started, everything ran on one flat network. As the number of users grew, I redesigned it from the ground up: planned subnetting, separate VLANs so each group's traffic stays apart, IP telephony, and campus-wide Wi-Fi with more than 80 access points.</p>
+            <p class="reveal">The result is a network that is faster, easier to troubleshoot, more secure, and ready to keep growing.</p>
+            <ul class="net__stats reveal">
+              <li><strong>1,000+</strong><span>Users served</span></li>
+              <li><strong>10×</strong><span>Growth from 100 users</span></li>
+              <li><strong>80+</strong><span>Wi-Fi access points</span></li>
+              <li><strong>Multi-VLAN</strong><span>Segmented with planned subnets</span></li>
+            </ul>
+          </div>
+          <figure class="topo reveal" aria-label="Diagram: internet connects to a firewall and core switch, which feeds several VLANs serving Wi-Fi access points, IP phones, computers and servers.">
+            <svg viewBox="0 0 520 470" role="img" aria-hidden="true">
+              <defs>
+                <linearGradient id="topoLine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D4AF6A" stop-opacity=".9"/><stop offset="1" stop-color="#D4AF6A" stop-opacity=".25"/></linearGradient>
+              </defs>
+              <!-- links -->
+              <g class="topo__links" stroke="url(#topoLine)" fill="none" stroke-width="1.2">
+                <path d="M260 62 V112"/>
+                <path d="M260 160 V198"/>
+                <path d="M260 236 C260 262, 74 256, 74 292"/>
+                <path d="M260 236 C260 262, 197 256, 197 292"/>
+                <path d="M260 236 C260 262, 323 256, 323 292"/>
+                <path d="M260 236 C260 262, 446 256, 446 292"/>
+                <path d="M74 330 V372"/><path d="M197 330 V372"/><path d="M323 330 V372"/><path d="M446 330 V372"/>
+              </g>
+              <!-- moving packets -->
+              <g class="topo__flow" fill="none" stroke="#E6CC97" stroke-width="2" stroke-linecap="round">
+                <path pathLength="100" d="M260 62 V112"/>
+                <path pathLength="100" d="M260 160 V198"/>
+                <path pathLength="100" d="M260 236 C260 262, 74 256, 74 292" style="animation-delay:-.6s"/>
+                <path pathLength="100" d="M260 236 C260 262, 197 256, 197 292" style="animation-delay:-1.4s"/>
+                <path pathLength="100" d="M260 236 C260 262, 323 256, 323 292" style="animation-delay:-.9s"/>
+                <path pathLength="100" d="M260 236 C260 262, 446 256, 446 292" style="animation-delay:-2s"/>
+                <path pathLength="100" d="M74 330 V372" style="animation-delay:-.3s"/><path pathLength="100" d="M197 330 V372" style="animation-delay:-1.1s"/><path pathLength="100" d="M323 330 V372" style="animation-delay:-1.7s"/><path pathLength="100" d="M446 330 V372" style="animation-delay:-.5s"/>
+              </g>
+              <!-- nodes -->
+              <g class="topo__node"><rect x="200" y="22" width="120" height="40" rx="20"/><text x="260" y="47">Internet</text></g>
+              <g class="topo__node topo__node--key"><rect x="180" y="112" width="160" height="48"/><text x="260" y="134">Firewall</text><text class="sub" x="260" y="150">Routing · security</text></g>
+              <g class="topo__node topo__node--key"><rect x="180" y="198" width="160" height="38"/><text x="260" y="222">Core switch</text></g>
+              <g class="topo__node topo__node--vlan"><rect x="24" y="292" width="100" height="38"/><text x="74" y="316">VLAN</text></g>
+              <g class="topo__node topo__node--vlan"><rect x="147" y="292" width="100" height="38"/><text x="197" y="316">VLAN</text></g>
+              <g class="topo__node topo__node--vlan"><rect x="273" y="292" width="100" height="38"/><text x="323" y="316">VLAN</text></g>
+              <g class="topo__node topo__node--vlan"><rect x="396" y="292" width="100" height="38"/><text x="446" y="316">VLAN</text></g>
+              <!-- endpoints -->
+              <g class="topo__end" transform="translate(74 400)">
+                <path d="M-15 -6 a21 21 0 0 1 30 0 M-9 0 a12 12 0 0 1 18 0"/><circle cx="0" cy="6" r="2.5"/>
+                <text y="40">80+ Wi-Fi APs</text>
+              </g>
+              <g class="topo__end" transform="translate(197 400)">
+                <rect x="-12" y="-14" width="24" height="30" rx="3"/><path d="M-6 -7 h12 M-6 0 h12 M-6 7 h5"/>
+                <text y="40">IP phones</text>
+              </g>
+              <g class="topo__end" transform="translate(323 400)">
+                <rect x="-16" y="-14" width="32" height="22" rx="2"/><path d="M-8 14 h16 M0 8 v6"/>
+                <text y="40">1,000+ users</text>
+              </g>
+              <g class="topo__end" transform="translate(446 400)">
+                <rect x="-14" y="-15" width="28" height="9" rx="1"/><rect x="-14" y="-3" width="28" height="9" rx="1"/><rect x="-14" y="9" width="28" height="9" rx="1"/>
+                <text y="40">Servers</text>
+              </g>
+            </svg>
+            <figcaption>Simplified view of a segmented, multi-VLAN design</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ JOURNEY ============ -->
     <section class="section" id="journey">
       <div class="wrap">
@@ -230,7 +308,60 @@
           <span class="eyebrow">Work</span>
           <a class="sec-head__idx link" href="https://github.com/mk-manishkandel" target="_blank" rel="noopener">github.com/mk-manishkandel ↗</a>
         </header>
-        <p class="work__intro reveal">My latest public projects, pulled live from GitHub.</p>
+        <div class="cases">
+          <article class="case reveal">
+            <div class="case__media case__media--stack">
+              <img src="assets/work/cafeflow-dashboard-main.jpg" alt="CafeFlow POS dashboard showing today's sales, transactions, menu items and staff" loading="lazy" width="1600" height="1000">
+              <img class="case__float" src="assets/work/cafeflow-transactions.jpg" alt="CafeFlow transaction history" loading="lazy" width="1600" height="1000">
+            </div>
+            <div class="case__body">
+              <span class="case__tag">Web app · Point of sale</span>
+              <h3 class="case__title">CafeFlow POS</h3>
+              <p><strong>Why I built it:</strong> our college canteens tracked staff allowances, student orders and cash sales on paper and spreadsheets. Month-end settlement took days, and nobody could see what was selling.</p>
+              <p>CafeFlow gives each branch a cashier terminal charged to staff allowances or cash, lets students pre-order from today's menu, prints kitchen tickets to network printers, and produces live sales reports and account statements.</p>
+              <ul class="case__stack"><li>React</li><li>Node.js</li><li>PostgreSQL</li><li>Redis</li><li>Socket.IO</li></ul>
+              <a class="case__link" href="https://github.com/mk-manishkandel/POS-for-Restaurant" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </article>
+
+          <article class="case case--flip reveal">
+            <div class="case__media case__media--term">
+              <img src="assets/work/minisync-sync.jpg" alt="Terminal showing Mini Sync pairing two computers and receiving files" loading="lazy" width="1600" height="780">
+            </div>
+            <div class="case__body">
+              <span class="case__tag">Desktop tool · File sync</span>
+              <h3 class="case__title">Mini Sync</h3>
+              <p><strong>Why I built it:</strong> I wanted my work folders on more than one computer without handing files to a cloud service or relying on a USB drive.</p>
+              <p>Mini Sync is a single small program for Windows and macOS. Pair two computers with their device IDs, share a folder, and every change is copied directly across the local network. There's no account and no server, and each shared folder can be read-only or read-write.</p>
+              <ul class="case__stack"><li>Rust</li><li>Peer-to-peer</li><li>Windows</li><li>macOS</li></ul>
+              <a class="case__link" href="https://github.com/mk-manishkandel/MiniSync" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </article>
+
+          <article class="case reveal">
+            <div class="case__media case__media--app">
+              <div class="phone">
+                <span class="phone__icon" aria-hidden="true">हि</span>
+                <span class="phone__name">Hisab</span>
+                <ul class="phone__chips" aria-label="Example smart entries">
+                  <li><code>khana 250</code><span>Food · Rs 250</span></li>
+                  <li><code>hijo bhada 15 hajar</code><span>Rent · Rs 15,000 · yesterday</span></li>
+                  <li><code>तलब ५० हजार</code><span>Salary · Rs 50,000</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="case__body">
+              <span class="case__tag">Mobile app · Personal finance</span>
+              <h3 class="case__title">Hisab: Track Your Money</h3>
+              <p><strong>Why I built it:</strong> expense apps don't understand how people in Nepal write about money, and they don't use the Bikram Sambat calendar. I wanted logging an expense to be as quick as typing a text message.</p>
+              <p>Type <em>khana 250</em> or <em>तलब ५० हजार</em> and Hisab fills in the amount, category, account and date. It handles eSewa, Khalti, banks and credit cards, money lent and borrowed, monthly budgets and bank SMS import. Everything stays on the phone.</p>
+              <ul class="case__stack"><li>Expo</li><li>React Native</li><li>SQLite</li><li>Nepali / English</li></ul>
+              <a class="case__link" href="https://github.com/mk-manishkandel/TrackYourMoney" target="_blank" rel="noopener">View on GitHub ↗</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="work__intro work__intro--more reveal">More recent projects, pulled live from GitHub.</p>
         <div class="repos" id="repos" aria-live="polite">
           <a class="repo repo--cta" href="https://github.com/mk-manishkandel" target="_blank" rel="noopener">
             <span class="repo__name">All projects on GitHub</span>
@@ -247,20 +378,58 @@
       <div class="wrap">
         <p class="eyebrow reveal">Contact</p>
         <h2 class="contact__title reveal">Need a design, a system, a network or <span class="gold">expert advice</span>?</h2>
-        <p class="contact__lede reveal">Send me a short note about what you're working on. I usually reply within a day or two.</p>
-        <div class="contact__grid reveal">
-          <a class="channel" href="mailto:hello@manishkandel.com.np">
-            <span class="channel__label">Email</span>
-            <span class="channel__value">hello@manishkandel.com.np</span>
-          </a>
-          <a class="channel" href="tel:+9779845182242">
-            <span class="channel__label">Phone</span>
-            <span class="channel__value">+977 984-518-2242</span>
-          </a>
-          <a class="channel" href="https://github.com/mk-manishkandel" target="_blank" rel="noopener">
-            <span class="channel__label">GitHub</span>
-            <span class="channel__value">mk-manishkandel</span>
-          </a>
+        <div class="contact__layout">
+          <div class="contact__side">
+            <p class="contact__lede reveal">Send me a short note about what you're working on. I usually reply within a day or two.</p>
+            <div class="channels reveal">
+              <a class="channel" href="mailto:hello@manishkandel.com.np">
+                <span class="channel__label">Email</span>
+                <span class="channel__value">hello@manishkandel.com.np</span>
+              </a>
+              <a class="channel" href="tel:+9779845182242">
+                <span class="channel__label">Phone</span>
+                <span class="channel__value">+977 984-518-2242</span>
+              </a>
+            </div>
+            <ul class="socials reveal" aria-label="Social profiles">
+              <li><a href="https://www.linkedin.com/in/manish-kandel/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.75v5.6h-4v-4.96c0-1.18-.02-2.7-1.7-2.7-1.7 0-1.96 1.28-1.96 2.6v5.06h-4z"/></svg><span>LinkedIn</span></a></li>
+              <li><a href="https://github.com/mk-manishkandel" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a></li>
+              <li><a href="https://www.facebook.com/maneskandel" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63c-.27-.04-1.2-.12-2.27-.12-2.25 0-3.79 1.37-3.79 3.9v2.15H7.92v2.94h2.54V21z"/></svg><span>Facebook</span></a></li>
+              <li><a href="https://www.instagram.com/_manes" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" class="ig"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" class="dot"/></svg><span>Instagram</span></a></li>
+            </ul>
+          </div>
+          <form class="form reveal" id="contactForm" novalidate>
+            <div class="form__row">
+              <div class="field">
+                <label for="cf-name">Your name</label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="cf-email">Email</label>
+                <input id="cf-email" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-topic">What do you need?</label>
+              <select id="cf-topic" name="topic">
+                <option>App or service development</option>
+                <option>AI agent or automation</option>
+                <option>Network infrastructure</option>
+                <option>IT consulting</option>
+                <option>Graphic design</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="5" required></textarea>
+            </div>
+            <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form__foot">
+              <button class="btn btn--gold" type="submit"><span class="form__btn-label">Send message</span> <span class="btn__arr" aria-hidden="true">→</span></button>
+              <p class="form__status" id="cf-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -270,6 +439,7 @@
     <div class="wrap footer__inner">
       <span class="footer__mark"><svg class="footer__logo" aria-hidden="true"><use href="#mk-logo"/></svg>Manish <span class="gold">Kandel</span></span>
       <span>© <span id="year">2026</span> · IT Head &amp; Assistant Lecturer, Boston International College</span>
+      <span class="footer__social"><a href="https://www.linkedin.com/in/manish-kandel/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mk-manishkandel" target="_blank" rel="noopener">GitHub</a><a href="https://www.facebook.com/maneskandel" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/_manes" target="_blank" rel="noopener">Instagram</a></span>
       <a href="#top" class="footer__top">Back to top ↑</a>
     </div>
   </footer>
