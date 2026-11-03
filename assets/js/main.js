@@ -206,7 +206,7 @@
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-/* ---------- Contact form (FormSubmit) ---------- */
+/* ---------- Contact form (Web3Forms) ---------- */
 (() => {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -231,19 +231,19 @@
     try {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 10000); // don't leave visitors waiting on a slow service
-      const res = await fetch("https://formsubmit.co/ajax/hello@manishkandel.com.np", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         signal: ctrl.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
+          access_key: "6eef9a91-06c4-4272-acf2-367ab4557d1f", // public Web3Forms key: only delivers to hello@manishkandel.com.np
+          subject: "New message from manishkandel.com.np: " + form.topic.value,
+          from_name: "manishkandel.com.np",
           name: form.name.value.trim(),
           email: form.email.value.trim(),
           topic: form.topic.value,
           message: form.message.value.trim(),
-          _subject: "New message from manishkandel.com.np: " + form.topic.value,
-          _replyto: form.email.value.trim(),
-          _template: "table",
-          _captcha: "false"
+          botcheck: ""
         })
       });
       clearTimeout(timer);
