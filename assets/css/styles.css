@@ -164,7 +164,7 @@ html:not(.js) .curtain { display: none; }
 /* ---------- Hero ---------- */
 .hero {
   position: relative; isolation: isolate; overflow: hidden;
-  min-height: max(100svh, 680px); display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: max(100svh, 680px); display: flex; flex-direction: column;
   padding-top: calc(var(--nav-h) + 3rem);
 }
 .hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
@@ -175,7 +175,46 @@ html:not(.js) .curtain { display: none; }
     radial-gradient(35% 45% at 95% 85%, rgba(212, 175, 106, .12), transparent 70%),
     radial-gradient(45% 55% at 0% 100%, rgba(22, 35, 61, .9), transparent 70%);
 }
-.hero__inner { width: 100%; display: grid; gap: 1.5rem; padding-bottom: clamp(2.5rem, 6vh, 4.5rem); }
+.hero__inner {
+  width: 100%; flex: 1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem); align-items: center; padding-block: clamp(1.5rem, 4vh, 3rem) clamp(2.5rem, 6vh, 4.5rem);
+}
+.hero__copy { display: grid; gap: 1.5rem; min-width: 0; }
+
+/* Orbit: logo with slowly turning rings */
+.orbit { position: relative; width: min(100%, 470px); aspect-ratio: 1; justify-self: center; container-type: size; }
+.orbit__ring { position: absolute; border-radius: 50%; }
+.orbit__ring--outer { inset: 7%; border: 1px dashed rgba(212, 175, 106, .3); animation: spin 120s linear infinite; }
+.orbit__ring--mid { inset: 22%; border: 1px solid var(--line-strong); animation: spin 48s linear infinite reverse; }
+.orbit__ring--mid i { position: absolute; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(212, 175, 106, .8); }
+.orbit__ring--mid i:nth-child(1) { left: 50%; top: 0; }
+.orbit__ring--mid i:nth-child(2) { left: 93.3%; top: 75%; }
+.orbit__ring--mid i:nth-child(3) { left: 6.7%; top: 75%; width: 4px; height: 4px; margin: -2px 0 0 -2px; }
+.orbit__track { position: absolute; inset: 0; animation: spin 70s linear infinite; }
+.orbit__item { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateY(-43cqw) rotate(calc(-1 * var(--a))); }
+.orbit__item b {
+  position: absolute; left: 0; top: 0; translate: -50% -50%; white-space: nowrap;
+  padding: .5rem 1rem; border: 1px solid rgba(212, 175, 106, .35); background: rgba(11, 20, 38, .88);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--frost);
+  animation: spin 70s linear infinite reverse;
+}
+.orbit__core {
+  position: absolute; inset: 36%; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #1E2F52, var(--midnight) 72%);
+  border: 1px solid rgba(212, 175, 106, .4);
+  box-shadow: 0 0 90px rgba(212, 175, 106, .14), 0 0 0 14px rgba(212, 175, 106, .04), inset 0 0 40px rgba(54, 84, 150, .4);
+  transition: transform 1.2s var(--ease);
+}
+.orbit__core svg { width: 50%; height: 50%; fill: var(--gold); filter: drop-shadow(0 0 18px rgba(212, 175, 106, .35)); }
+@keyframes spin { to { rotate: 360deg; } }
+@media (min-width: 901px) {
+  .hero__name { font-size: clamp(2.75rem, 5.6vw, 5.25rem); white-space: nowrap; }
+}
+@media (max-width: 900px) {
+  .hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .orbit { display: none; }
+}
 .hero__name {
   margin: 0; font-family: var(--display); font-weight: 400;
   font-size: clamp(2.75rem, 6.2vw, 5.75rem); line-height: 1.05; letter-spacing: -.02em;
@@ -213,6 +252,7 @@ html:not(.js) .curtain { display: none; }
 .is-loaded .hero__lede { transition-delay: 1.3s; }
 .is-loaded .hero__ctas { transition-delay: 1.42s; }
 .is-loaded .hero__stats { transition-delay: 1.55s; }
+.is-loaded .orbit { transition-delay: 1.2s; transition-duration: 1.8s, 2s; }
 
 /* ---------- Marquee ---------- */
 .marquee { border-block: 1px solid var(--line); overflow: hidden; padding-block: 1.4rem; background: var(--deep); }
