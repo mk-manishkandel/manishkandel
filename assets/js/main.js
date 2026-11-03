@@ -1,5 +1,6 @@
 /* Manish Kandel — site interactions */
 (() => {
+  if (window.top !== window.self) { try { window.top.location.replace(window.self.location.href); } catch (e) { document.documentElement.style.display = "none"; } }
   const root = document.documentElement;
   root.classList.add("js");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -177,7 +178,7 @@
     .then(repos => {
       const HIDE = ["mk-manishkandel", "manishkandel", "hack-your-tv", "pos-for-restaurant", "minisync", "trackyourmoney"]; // never shown (featured above)
       const FEATURE = [];                            // always shown
-      const pool = repos.filter(r => !r.fork && !HIDE.includes(r.name.toLowerCase()));
+      const pool = repos.filter(r => !r.fork && !HIDE.includes(r.name.toLowerCase()) && /^https:\/\/github\.com\//.test(r.html_url));
       const featured = pool.filter(r => FEATURE.includes(r.name.toLowerCase()));
       const rest = pool.filter(r => !FEATURE.includes(r.name.toLowerCase()));
       const list = featured.concat(rest).slice(0, 5)
@@ -256,8 +257,11 @@
       const subject = "Website enquiry: " + form.topic.value;
       const body = form.message.value.trim() + "\n\n" + form.name.value.trim() + "\n" + form.email.value.trim();
       const href = "mailto:hello@manishkandel.com.np?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      const link = document.createElement("a");
+      link.href = href;
+      link.textContent = "Send it with your email app instead →";
       status.className = "form__status is-err";
-      status.innerHTML = 'The form couldn\'t send just now. <a href="' + href + '">Send it with your email app instead →</a> (your message is filled in).';
+      status.replaceChildren("The form couldn't send just now. ", link, " (your message is filled in).");
     } finally {
       btn.disabled = false; label.textContent = "Send message";
     }
