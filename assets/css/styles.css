@@ -178,11 +178,10 @@ html:not(.js) .curtain { display: none; }
 .hero__inner { width: 100%; display: grid; gap: 1.5rem; padding-bottom: clamp(2.5rem, 6vh, 4.5rem); }
 .hero__name {
   margin: 0; font-family: var(--display); font-weight: 400;
-  font-size: clamp(3.5rem, 11.5vw, 10.5rem); line-height: .92; letter-spacing: -.025em;
+  font-size: clamp(2.75rem, 6.2vw, 5.75rem); line-height: 1.05; letter-spacing: -.02em;
 }
-.hero__name .line { display: block; overflow: hidden; padding-bottom: .06em; }
+.hero__name .line { display: inline-block; overflow: hidden; padding-bottom: .08em; vertical-align: bottom; }
 .hero__name .line > span { display: inline-block; }
-.hero__name .line:nth-child(2) { padding-left: clamp(1.5rem, 9vw, 9rem); }
 .hero__lede { margin: 0; max-width: 54ch; font-size: clamp(1.05rem, 1.3vw, 1.2rem); color: rgba(238, 240, 245, .72); font-weight: 300; }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: .5rem; }
 .hero__stats {
