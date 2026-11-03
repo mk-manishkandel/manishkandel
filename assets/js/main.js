@@ -1,0 +1,201 @@
+/* Manish Kandel — site interactions */
+(() => {
+  const root = document.documentElement;
+  root.classList.add("js");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Load sequence ---------- */
+  const loaded = () => root.classList.add("is-loaded");
+  if (document.fonts && document.fonts.ready) {
+    Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1800))]).then(() => setTimeout(loaded, 350));
+  } else {
+    window.addEventListener("load", loaded);
+  }
+  setTimeout(loaded, 3000); // failsafe: never leave the curtain up
+
+  /* ---------- Smooth scroll (Lenis) ---------- */
+  let lenis = null;
+  if (!reduced && window.Lenis) {
+    lenis = new window.Lenis({ duration: 1.25, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    const raf = time => { lenis.raf(time); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", e => {
+      const id = a.getAttribute("href");
+      const target = id === "#top" ? document.body : document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      closeMenu();
+      if (lenis) lenis.scrollTo(id === "#top" ? 0 : target, { offset: 0 });
+      else (id === "#top" ? window.scrollTo({ top: 0 }) : target.scrollIntoView());
+    });
+  });
+
+  /* ---------- Nav: background on scroll, hide on scroll down ---------- */
+  const nav = document.getElementById("nav");
+  let lastY = 0;
+  const onScroll = () => {
+    const y = window.scrollY;
+    nav.classList.toggle("is-scrolled", y > 40);
+    const menuOpen = toggle.getAttribute("aria-expanded") === "true";
+    nav.classList.toggle("is-hidden", !menuOpen && y > 400 && y > lastY + 4);
+    if (y < lastY - 4 || y < 400) nav.classList.remove("is-hidden");
+    lastY = y;
+  };
+
+  /* ---------- Mobile menu ---------- */
+  const toggle = document.getElementById("navToggle");
+  const panel = document.getElementById("navPanel");
+  function closeMenu() {
+    if (toggle.getAttribute("aria-expanded") !== "true") return;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    panel.hidden = true;
+    if (lenis) lenis.start();
+  }
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    panel.hidden = !open;
+    nav.classList.add("is-scrolled");
+    if (lenis) open ? lenis.stop() : lenis.start();
+  });
+  window.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Active nav link ---------- */
+  const links = [...document.querySelectorAll(".nav__links a")];
+  const sections = links.map(l => document.querySelector(l.getAttribute("href"))).filter(Boolean);
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      links.forEach(l => l.toggleAttribute("aria-current", l.getAttribute("href") === "#" + en.target.id));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  sections.forEach(s => spy.observe(s));
+
+  /* ---------- Scroll reveal ---------- */
+  const revealEls = document.querySelectorAll(".reveal, .sec-head");
+  const groups = new Map();
+  revealEls.forEach(el => {
+    const parent = el.parentElement;
+    const i = groups.get(parent) || 0;
+    el.style.setProperty("--d", Math.min(i * 0.09, 0.45) + "s");
+    groups.set(parent, i + 1);
+  });
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealEls.forEach(el => el.classList.add("is-in"));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* ---------- Hero canvas: slow drifting gold constellation ---------- */
+  const canvas = document.getElementById("heroCanvas");
+  if (canvas && !reduced) {
+    const ctx = canvas.getContext("2d");
+    let w, h, dpr, pts = [], running = true, mouse = { x: -9999, y: -9999 };
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(70, (w * h) / 22000));
+      pts = Array.from({ length: n }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18,
+        r: Math.random() * 1.4 + .4
+      }));
+    };
+    const draw = () => {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        const dx = p.x - mouse.x, dy = p.y - mouse.y, dist = Math.hypot(dx, dy);
+        if (dist < 140) { p.x += dx / dist * .6; p.y += dy / dist * .6; }
+      }
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 150) {
+            ctx.strokeStyle = `rgba(212,175,106,${(1 - d / 150) * .16})`;
+            ctx.lineWidth = .6;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      for (const p of pts) {
+        ctx.fillStyle = "rgba(230,204,151,.7)";
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    };
+    resize(); draw();
+    window.addEventListener("resize", resize);
+    canvas.parentElement.addEventListener("pointermove", e => {
+      const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    canvas.parentElement.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+    new IntersectionObserver(([en]) => {
+      const was = running; running = en.isIntersecting;
+      if (running && !was) draw();
+    }).observe(canvas);
+  }
+
+  /* ---------- Count-up for the 5+ years stat ---------- */
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const end = +el.dataset.count;
+    if (reduced || end > 100) return;
+    el.textContent = "0";
+    const start = () => {
+      const t0 = performance.now(), dur = 1600;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+        el.textContent = Math.round(end * e);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    setTimeout(start, 1700);
+  });
+
+  /* ---------- Live GitHub projects ---------- */
+  const repoBox = document.getElementById("repos");
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const pretty = n => n.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  fetch("https://api.github.com/users/mk-manishkandel/repos?sort=updated&per_page=12")
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(repos => {
+      const list = repos.filter(r => !r.fork && !["mk-manishkandel", "manishkandel"].includes(r.name.toLowerCase())).slice(0, 5);
+      if (!list.length) return;
+      const cards = list.map(r => `
+        <a class="repo reveal" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+          <span class="repo__arrow" aria-hidden="true">↗</span>
+          <span class="repo__name">${esc(pretty(r.name))}</span>
+          <span class="repo__desc">${esc(r.description || "A project on GitHub.")}</span>
+          <span class="repo__meta">
+            ${r.language ? `<span class="lang">${esc(r.language)}</span>` : ""}
+            <span>Updated ${new Date(r.pushed_at).toLocaleDateString("en-GB", { month: "short", year: "numeric" })}</span>
+          </span>
+        </a>`).join("");
+      repoBox.insertAdjacentHTML("afterbegin", cards);
+      repoBox.querySelectorAll(".repo.reveal").forEach((el, i) => {
+        el.style.setProperty("--d", (i * 0.08) + "s");
+        requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("is-in")));
+      });
+    })
+    .catch(() => { /* keep the GitHub link card */ });
+
+  /* ---------- Year ---------- */
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+})();
