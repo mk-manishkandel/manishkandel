@@ -1,6 +1,6 @@
 /* Manish Kandel — site interactions */
 (() => {
-  if (window.top !== window.self) { try { window.top.location.replace(window.self.location.href); } catch (e) { document.documentElement.style.display = "none"; } }
+  if (window.top !== window.self) { document.documentElement.style.display = "none"; try { window.top.location.replace(window.self.location.href); } catch (e) {} return; } // never render inside another site's frame
   const root = document.documentElement;
   root.classList.add("js");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
