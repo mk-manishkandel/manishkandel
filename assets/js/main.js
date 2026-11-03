@@ -229,8 +229,11 @@
 
     btn.disabled = true; label.textContent = "Sending…"; setStatus("");
     try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10000); // don't leave visitors waiting on a slow service
       const res = await fetch("https://formsubmit.co/ajax/hello@manishkandel.com.np", {
         method: "POST",
+        signal: ctrl.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name.value.trim(),
@@ -243,12 +246,18 @@
           _captcha: "false"
         })
       });
+      clearTimeout(timer);
       const data = await res.json().catch(() => ({}));
       if (!res.ok || data.success === false || data.success === "false") throw new Error(data.message || res.status);
       form.reset();
       setStatus("Thanks, your message was sent. I'll reply soon.", "ok");
     } catch (err) {
-      setStatus("Your message couldn't be sent. Please email hello@manishkandel.com.np directly.", "err");
+      // Service unreachable: hand the visitor's message to their email app so nothing is lost.
+      const subject = "Website enquiry: " + form.topic.value;
+      const body = form.message.value.trim() + "\n\n" + form.name.value.trim() + "\n" + form.email.value.trim();
+      const href = "mailto:hello@manishkandel.com.np?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      status.className = "form__status is-err";
+      status.innerHTML = 'The form couldn\'t send just now. <a href="' + href + '">Send it with your email app instead →</a> (your message is filled in).';
     } finally {
       btn.disabled = false; label.textContent = "Send message";
     }

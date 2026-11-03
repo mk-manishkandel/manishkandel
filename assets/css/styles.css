@@ -406,6 +406,7 @@ html:not(.js) .curtain { display: none; }
 .form__status { margin: 0; font-size: .9rem; color: var(--steel); }
 .form__status.is-ok { color: var(--gold); }
 .form__status.is-err { color: #E0796B; }
+.form__status a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 900px) { .contact__layout { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 560px) { .form__row { grid-template-columns: minmax(0, 1fr); } }
 
