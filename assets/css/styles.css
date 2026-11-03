@@ -182,7 +182,7 @@ html:not(.js) .curtain { display: none; }
 .hero__copy { display: grid; gap: 1.5rem; min-width: 0; }
 
 /* Orbit: logo with slowly turning rings */
-.orbit { position: relative; width: min(100%, 470px); aspect-ratio: 1; justify-self: center; container-type: size; }
+.orbit { position: relative; width: min(100%, 470px); aspect-ratio: 1; justify-self: end; margin-right: clamp(-3rem, calc(3.5rem - 6vw), 0rem); container-type: size; }
 .orbit__ring { position: absolute; border-radius: 50%; }
 .orbit__ring--outer { inset: 7%; border: 1px dashed rgba(212, 175, 106, .3); animation: spin 120s linear infinite; }
 .orbit__ring--mid { inset: 22%; border: 1px solid var(--line-strong); animation: spin 48s linear infinite reverse; }
