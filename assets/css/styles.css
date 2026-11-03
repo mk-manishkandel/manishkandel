@@ -450,7 +450,7 @@ html:not(.js) .curtain { display: none; }
 }
 
 /* ---------- Featured case studies ---------- */
-.cases { display: grid; gap: clamp(4rem, 10vh, 7rem); margin-bottom: clamp(4.5rem, 11vh, 7rem); }
+.cases { display: grid; gap: clamp(6.5rem, 18vh, 11rem); margin-bottom: clamp(6.5rem, 16vh, 10rem); }
 .case { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 .case--flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .case--flip .case__media { order: 2; }
