@@ -412,7 +412,7 @@ html:not(.js) .curtain { display: none; }
 .net__stats li:nth-child(even) { padding-left: 1.25rem; border-left: 1px solid var(--line); }
 .net__stats strong { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.1; color: var(--gold); font-variant-numeric: tabular-nums; }
 .net__stats span { font-size: .85rem; color: var(--steel); }
-.topo { margin: 0; padding: clamp(1rem, 2.5vw, 2rem); border: 1px solid var(--line); background: radial-gradient(80% 70% at 50% 40%, rgba(54, 84, 150, .22), transparent 70%), rgba(7, 14, 28, .45); display: grid; gap: .75rem; min-width: 0; }
+.topo { margin: 0; padding: 0; border: 0; background: radial-gradient(60% 55% at 50% 45%, rgba(54, 84, 150, .22), transparent 75%); display: grid; gap: .75rem; min-width: 0; }
 .topo svg { width: 100%; height: auto; }
 .topo figcaption { font-size: .78rem; color: var(--steel); text-align: center; letter-spacing: .04em; }
 .topo__node rect { fill: var(--ink-navy); stroke: var(--line-strong); }
