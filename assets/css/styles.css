@@ -460,11 +460,12 @@ html:not(.js) .curtain { display: none; }
 .case__float { position: absolute; right: 0; bottom: 0; width: 52% !important; transition: transform 1s var(--ease); }
 .case:hover .case__float { transform: translateY(-8px); }
 .case__media--term img { border-radius: 14px; }
-.case__media--app { display: grid; place-items: center; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: 14px;
-  background: radial-gradient(90% 70% at 50% 0%, rgba(212, 175, 106, .14), transparent 70%), var(--deep); }
-.phones { display: flex; justify-content: center; align-items: flex-start; gap: clamp(.75rem, 3vw, 1.75rem); width: 100%; }
-.case__media .phones img { width: min(46%, 250px); border-radius: clamp(18px, 3vw, 30px); border: 6px solid #05090f; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
-.case__media .phones img + img { margin-top: 2.5rem; }
+.case__media--app { display: grid; place-items: center; }
+.phones { position: relative; width: min(100%, 440px); aspect-ratio: 1; }
+.case__media .phones img { position: absolute; width: 42%; border-radius: clamp(16px, 2.4vw, 26px); border: 5px solid #05090f; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
+.case__media .phones img:first-child { left: 12%; top: 0; z-index: 1; }
+.case__media .phones img + img { right: 12%; top: 8%; transition: transform 1s var(--ease); }
+.case:hover .phones img + img { transform: translateY(-8px); }
 .case__title--icon { display: flex; align-items: center; gap: .9rem; }
 .case__title--icon img { width: 56px; height: 56px; border-radius: 14px; flex: none; }
 .case__body { display: grid; gap: 1rem; align-content: start; min-width: 0; }
