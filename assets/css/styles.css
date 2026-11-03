@@ -460,6 +460,7 @@ html:not(.js) .curtain { display: none; }
 .case__float { position: absolute; right: 0; bottom: 0; width: 52% !important; transition: transform 1s var(--ease); }
 .case:hover .case__float { transform: translateY(-8px); }
 .case__media--term img { border-radius: 12px; border: 0; }
+.case__media--term .case__float { width: 60% !important; }
 .case__media--app { display: grid; place-items: center; }
 .phones { position: relative; width: min(100%, 520px); aspect-ratio: 520 / 380; }
 .case__media .phones img { position: absolute; top: 0; width: 46%; border-radius: clamp(16px, 2.4vw, 26px) clamp(16px, 2.4vw, 26px) 0 0; border: 5px solid #05090f; border-bottom: 0;
