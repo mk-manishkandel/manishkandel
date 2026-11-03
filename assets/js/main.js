@@ -175,7 +175,13 @@
   fetch("https://api.github.com/users/mk-manishkandel/repos?sort=updated&per_page=12")
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(repos => {
-      const list = repos.filter(r => !r.fork && !["mk-manishkandel", "manishkandel"].includes(r.name.toLowerCase())).slice(0, 5);
+      const HIDE = ["mk-manishkandel", "manishkandel", "hack-your-tv"];   // never shown
+      const FEATURE = ["pos-for-restaurant"];                              // always shown
+      const pool = repos.filter(r => !r.fork && !HIDE.includes(r.name.toLowerCase()));
+      const featured = pool.filter(r => FEATURE.includes(r.name.toLowerCase()));
+      const rest = pool.filter(r => !FEATURE.includes(r.name.toLowerCase()));
+      const list = featured.concat(rest).slice(0, 5)
+        .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
       if (!list.length) return;
       const cards = list.map(r => `
         <a class="repo reveal" href="${esc(r.html_url)}" target="_blank" rel="noopener">
