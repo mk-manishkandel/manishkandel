@@ -386,6 +386,9 @@ html:not(.js) .curtain { display: none; }
 .form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
 .field { display: grid; gap: .45rem; min-width: 0; }
 .field label { font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--steel); }
+.field .req { color: var(--gold); letter-spacing: 0; }
+.form__note { margin: 0; font-size: .8rem; color: var(--steel); }
+.form__note .req { color: var(--gold); }
 .field input, .field select, .field textarea {
   width: 100%; font: inherit; font-size: 1rem; color: var(--frost); background: rgba(7, 14, 28, .6);
   border: 1px solid var(--line-strong); border-radius: 0; padding: .85rem 1rem;

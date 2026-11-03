@@ -446,11 +446,11 @@
           <form class="form reveal" id="contactForm" novalidate>
             <div class="form__row">
               <div class="field">
-                <label for="cf-name">Your name</label>
+                <label for="cf-name">Your name <span class="req" aria-hidden="true">*</span></label>
                 <input id="cf-name" name="name" type="text" autocomplete="name" required>
               </div>
               <div class="field">
-                <label for="cf-email">Email</label>
+                <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
                 <input id="cf-email" name="email" type="email" autocomplete="email" required>
               </div>
             </div>
@@ -466,12 +466,13 @@
               </select>
             </div>
             <div class="field">
-              <label for="cf-message">Message</label>
+              <label for="cf-message">Message <span class="req" aria-hidden="true">*</span></label>
               <textarea id="cf-message" name="message" rows="5" required></textarea>
             </div>
             <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form__foot">
               <button class="btn btn--gold" type="submit"><span class="form__btn-label">Send message</span> <span class="btn__arr" aria-hidden="true">→</span></button>
+              <p class="form__note"><span class="req" aria-hidden="true">*</span> Required</p>
               <p class="form__status" id="cf-status" role="status" aria-live="polite"></p>
             </div>
           </form>
