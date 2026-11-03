@@ -462,15 +462,11 @@ html:not(.js) .curtain { display: none; }
 .case__media--term img { border-radius: 14px; }
 .case__media--app { display: grid; place-items: center; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: 14px;
   background: radial-gradient(90% 70% at 50% 0%, rgba(212, 175, 106, .14), transparent 70%), var(--deep); }
-.phone { width: min(100%, 320px); display: grid; justify-items: center; gap: .6rem; padding: 2.25rem 1.5rem 1.75rem; border-radius: 34px;
-  border: 1px solid var(--line-strong); background: var(--midnight); box-shadow: 0 30px 70px rgba(0, 0, 0, .45); }
-.phone__icon { width: 88px; height: 88px; border-radius: 22px; display: grid; place-items: center; font-size: 2.6rem; font-weight: 700; color: var(--midnight);
-  background: linear-gradient(145deg, var(--gold-soft), var(--gold)); box-shadow: 0 12px 30px rgba(0, 0, 0, .4); }
-.phone__name { font-family: var(--display); font-size: 1.4rem; margin-bottom: .5rem; }
-.phone__chips { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: .55rem; }
-.phone__chips li { display: grid; gap: .15rem; padding: .7rem .9rem; border-radius: 12px; background: var(--ink-navy); border: 1px solid var(--line); }
-.phone__chips code { font-family: "SF Mono", Menlo, monospace; font-size: .85rem; color: var(--gold-soft); }
-.phone__chips span { font-size: .78rem; color: var(--steel); }
+.phones { display: flex; justify-content: center; align-items: flex-start; gap: clamp(.75rem, 3vw, 1.75rem); width: 100%; }
+.case__media .phones img { width: min(46%, 250px); border-radius: clamp(18px, 3vw, 30px); border: 6px solid #05090f; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); }
+.case__media .phones img + img { margin-top: 2.5rem; }
+.case__title--icon { display: flex; align-items: center; gap: .9rem; }
+.case__title--icon img { width: 56px; height: 56px; border-radius: 14px; flex: none; }
 .case__body { display: grid; gap: 1rem; align-content: start; min-width: 0; }
 .case__body p { margin: 0; color: rgba(238, 240, 245, .72); font-size: .975rem; }
 .case__body strong { color: var(--frost); font-weight: 700; }
