@@ -295,7 +295,7 @@ html:not(.js) .curtain { display: none; }
 @media (max-width: 860px) { .about { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- Services ---------- */
-.services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .service {
   position: relative; padding: 2.25rem 1.75rem 2.5rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
   display: grid; gap: 1rem; align-content: start; overflow: hidden; isolation: isolate;
