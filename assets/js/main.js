@@ -173,12 +173,40 @@
   const repoBox = document.getElementById("repos");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const pretty = n => n.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-  fetch("https://api.github.com/users/mk-manishkandel/repos?sort=updated&per_page=12")
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  // GitHub allows 60 API calls an hour per IP address, which a shared office or college network
+  // can use up. So: reuse a copy saved in this browser for an hour, fall back to an older saved copy,
+  // and finally to the built-in list below, so the projects always show.
+  const CACHE_KEY = "gh-repos-v1", CACHE_MS = 60 * 60 * 1000;
+  const FALLBACK = [
+    { name: "SlideRelay", html_url: "https://github.com/mk-manishkandel/SlideRelay", language: "Rust", pushed_at: "2026-11-08T10:37:11Z",
+      description: "Show your live PowerPoint slideshow on everyone's phone over local Wi-Fi. Viewers scan a QR code, nothing to install. Free, open source, no cloud, no telemetry. Windows & macOS." },
+    { name: "Paisa-Aayo", html_url: "https://github.com/mk-manishkandel/Paisa-Aayo", language: "Kotlin", pushed_at: "2026-11-07T08:21:29Z",
+      description: "पैसा आयो · Free, open-source payment speaker for Android. Announces eSewa, Khalti, Fonepay QR and bank SMS payments aloud in Nepali or English. No ads, no internet permission." },
+    { name: "ScanToPrint", html_url: "https://github.com/mk-manishkandel/ScanToPrint", language: "Rust", pushed_at: "2026-11-04T12:25:44Z",
+      description: "QR-code document printing for print shops. Customers scan, upload PDFs, photos or Office files from their phone, then send to the counter or print themselves. Runs on the shop's Windows PC, no cloud. Written in Rust." },
+    { name: "EmbedDriveToWordpress", html_url: "https://github.com/mk-manishkandel/EmbedDriveToWordpress", language: "PHP", pushed_at: "2026-11-01T14:18:51Z",
+      description: "Show Google Drive folders and files on your WordPress site. File browser, previews, search, ZIP downloads and multiple accounts. Open source, no licence keys or tracking." },
+    { name: "MacClipboard", html_url: "https://github.com/mk-manishkandel/MacClipboard", language: "Swift", pushed_at: "2026-10-29T08:58:36Z",
+      description: "Free, private clipboard manager for macOS. Encrypted local history, one-click paste, automatic updates. Fork of Maccy." }
+  ];
+  const readCache = () => { try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; } };
+  const saved = readCache();
+  const fresh = saved && Array.isArray(saved.repos) && Date.now() - saved.t < CACHE_MS;
+  (fresh ? Promise.resolve(saved.repos)
+    : fetch("https://api.github.com/users/mk-manishkandel/repos?sort=updated&per_page=30",
+            { signal: typeof AbortSignal.timeout === "function" ? AbortSignal.timeout(6000) : undefined })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(repos => {
+          if (!Array.isArray(repos)) throw new Error("bad response");
+          const slim = repos.map(({ name, html_url, description, language, pushed_at, fork }) => ({ name, html_url, description, language, pushed_at, fork }));
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), repos: slim })); } catch (e) {}
+          return slim;
+        }))
+    .catch(() => (saved && Array.isArray(saved.repos) ? saved.repos : FALLBACK))
     .then(repos => {
       const HIDE = ["mk-manishkandel", "manishkandel", "hack-your-tv", "pos-for-restaurant", "minisync", "trackyourmoney"]; // never shown (featured above)
       const FEATURE = [];                            // always shown
-      const pool = repos.filter(r => !r.fork && !HIDE.includes(r.name.toLowerCase()) && /^https:\/\/github\.com\//.test(r.html_url));
+      const pool = repos.filter(r => r && typeof r.name === "string" && !r.fork && !HIDE.includes(r.name.toLowerCase()) && /^https:\/\/github\.com\//.test(r.html_url));
       const featured = pool.filter(r => FEATURE.includes(r.name.toLowerCase()));
       const rest = pool.filter(r => !FEATURE.includes(r.name.toLowerCase()));
       const list = featured.concat(rest).slice(0, 5)
